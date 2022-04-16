@@ -9,7 +9,7 @@
       :loading="computedLoadType"
       @load.once="getWidth"
     />
-    <div style="background-color: #00000011; top: 0; left: 0; height: 0; ">
+    <div style="background-color: #0001; top: 0; left: 0; height: 0;">
       <slot></slot>
     </div>
   </div>
