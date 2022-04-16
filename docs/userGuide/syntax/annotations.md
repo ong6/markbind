@@ -66,11 +66,11 @@ Annotate point also allows users to display its content as a legend below the di
 
 <annotate src="https://www.researchgate.net/profile/Chaiwat-Sakul/publication/228949121/figure/fig2/AS:300654661783574@1448693065750/The-previous-square-root-circuit-1.png" width="500">
   <!-- Default Legend (popover only)-->
-  <a-point x="25%" y="50%" content="There is only text when you click me" label="1"/>
+  <a-point x="0%" y="0%" content="There is only text when you click me" label="1"/>
   <!-- Set Legend to bottom only -->
   <a-point x="50%" y="50%" content="Clicking on this does nothing" label="2" legend="bottom"/>
   <!-- Set Legend to both -->
-  <a-point x="75%" y="50%" content="There is text at both locations" header="Headers are displayed as well" label="3" legend="both"/>
+  <a-point x="100%" y="100%" content="There is text at both locations" header="Headers are displayed as well" label="3" legend="both"/>
 </annotate>
 </variable>
 </include>

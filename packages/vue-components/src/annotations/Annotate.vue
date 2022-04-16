@@ -9,9 +9,9 @@
       :loading="computedLoadType"
       @load.once="getWidth"
     />
-    <span class="point-wrapper">
+    <div style="background-color: #00000011; top: 0; left: 0; height: 0; ">
       <slot></slot>
-    </span>
+    </div>
   </div>
 </template>
 
@@ -101,11 +101,5 @@ export default {
     }
 
     .point-wrapper {
-      width: 100%;
-      height: 100%;
-      border: 1px solid red;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
 </style>

@@ -1,56 +1,5 @@
 <template>
-  <div class="annotate-point">
-  {{ this.width }}
-  {{ this.height }}
-    <span
-      v-if="isMounted"
-      class="popover-annotation"
-      :style="pointPosition"
-    >
-      <portal v-if="targetEl.id" :to="'popover:' + targetEl.id">
-        <h3 v-if="hasHeader" class="popover-header">
-          <slot name="header"></slot>
-        </h3>
-        <div class="popover-body">
-          <slot name="body"></slot>
-        </div>
-      </portal>
-
-      <v-dropdown
-        v-if="isMounted"
-        :placement="placement"
-        :delay="0"
-        :triggers="triggers"
-        :popper-triggers="triggers"
-        :hide-triggers="triggers"
-        :distance="computeDistance"
-        :disabled="!hasPopover"
-        shift-cross-axis
-      >
-        <span
-          class="hover-wrapper"
-          @click.stop
-        >
-          <button
-            class="hover-point"
-            :style="pointStyle"
-          >
-          </button>
-          <span class="hover-label">{{ label }}</span>
-        </span>
-
-        <template #popper>
-          <div class="popover-container">
-            <h3 v-if="hasHeader" class="popover-header">
-              {{ header }}
-            </h3>
-            <div class="popover-body">
-              {{ content }}
-            </div>
-          </div>
-        </template>
-      </v-dropdown>
-    </span>
+<div>
     <span v-if="hasBottomText && hasLabel" class="legend-wrapper">
       <h5 class="text-header">
         {{ computedBottomHeader }}
@@ -59,12 +8,55 @@
         {{ content }}
       </div>
     </span>
+
+  <div class="annotate-point">
+    <div v-if="isMounted" class="popover-annotation">
+      <span :style="pointPosition">
+        <v-dropdown
+          v-if="isMounted"
+          :placement="placement"
+          :delay="0"
+          :triggers="triggers"
+          :popper-triggers="triggers"
+          :hide-triggers="triggers"
+          :distance="computeDistance"
+          :disabled="!hasPopover"
+          shift-cross-axis
+        >
+          <span class="hover-wrapper" @click.stop>
+            <button class="hover-point" :style="pointStyle"></button>
+            <span class="hover-label">{{ label }}</span>
+          </span>
+
+          <template #popper>
+            <div class="popover-container">
+              <h3 v-if="hasHeader" class="popover-header">
+                {{ header }}
+              </h3>
+              <div class="popover-body">
+                {{ content }}
+              </div>
+            </div>
+          </template>
+        </v-dropdown>
+      </span>
+
+      <portal v-if="targetEl.id" :to="'popover:' + targetEl.id">
+        <h3 v-if="hasHeader" class="popover-header">
+          <slot name="header"></slot>
+        </h3>
+        <div class="popover-body">
+          <slot name="body"></slot>
+        </div>
+      </portal>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Portal } from 'portal-vue';
+import { Portal } from "portal-vue";
 
 export default {
   components: {
@@ -73,47 +65,47 @@ export default {
   props: {
     content: {
       type: String,
-      default: '',
+      default: "",
     },
     header: {
       type: String,
-      default: '',
+      default: "",
     },
     placement: {
       type: String,
-      default: 'top',
+      default: "top",
     },
     x: {
       type: String,
-      default: '0',
+      default: "0",
     },
     y: {
       type: String,
-      default: '0',
+      default: "0",
     },
     color: {
       type: String,
-      default: 'green',
+      default: "green",
     },
     opacity: {
       type: String,
-      default: '0.3',
+      default: "0.3",
     },
     size: {
       type: String,
-      default: '40',
+      default: "40",
     },
     label: {
       type: String,
-      default: '',
+      default: "",
     },
     legend: {
       type: String,
-      default: 'popover',
+      default: "popover",
     },
     trigger: {
       type: String,
-      default: 'click',
+      default: "click",
     },
   },
   data() {
@@ -125,7 +117,7 @@ export default {
       src: this.src,
     };
   },
-  inject: ['width', 'height', 'src'],
+  inject: ["width", "height", "src"],
   computed: {
     pointPosition() {
       // eslint-disable-next-line no-restricted-globals
@@ -150,6 +142,7 @@ export default {
       return {
         left: this.x,
         top: this.y,
+        position: 'absolute',
       };
       /* return { */
       /*   left: `${this.width * this.toDecimal(this.x) - this.size / 2}px`, */
@@ -165,34 +158,34 @@ export default {
       };
     },
     triggers() {
-      return this.trigger.split(' ');
+      return this.trigger.split(" ");
     },
     computeDistance() {
       return this.size * (2 / 3);
     },
     hasHeader() {
-      return this.header !== '';
+      return this.header !== "";
     },
     hasWidth() {
-      return this.width !== '';
+      return this.width !== "";
     },
     hasHeight() {
-      return this.height !== '';
+      return this.height !== "";
     },
     hasLabel() {
-      return this.label !== '';
+      return this.label !== "";
     },
     hasBottomText() {
-      return this.legend === 'bottom' || this.legend === 'both';
+      return this.legend === "bottom" || this.legend === "both";
     },
     hasPopover() {
-      return this.legend === 'popover' || this.legend === 'both';
+      return this.legend === "popover" || this.legend === "both";
     },
     computedBottomHeader() {
-      if (this.label !== '' && this.header === '') {
+      if (this.label !== "" && this.header === "") {
         return this.label;
       }
-      if (this.label === '' && this.header !== '') {
+      if (this.label === "" && this.header !== "") {
         return this.header;
       }
       return `${this.label}: ${this.header}`;
@@ -219,32 +212,42 @@ export default {
 </script>
 
 <style>
-    .annotate-point {
-        margin-top: 1rem;
-    }
+.annotate-point {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  bottom: 0; 
+  width: 100%;
+  height: 100%;
+}
 
-    .popover-annotation {
-        position: absolute;
-    }
+.popover-annotation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
-    .hover-point {
-        border-radius: 50%;
-        border-style: solid;
-        border-width: 1px;
-        z-index: 2;
-    }
+.hover-point {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  z-index: 2;
+}
 
-    .hover-label {
-        position: absolute;
-        pointer-events: none;
-        z-index: 1;
-    }
+.hover-label {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
 
-    .hover-wrapper {
-        z-index: 0;
-        background: transparent;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+.hover-wrapper {
+  z-index: 0;
+  background: transparent;
+}
+
+.legend-wrapper {
+  height: 100%;
+  position: relative;
+  background-color: #00ff0044;
+}
 </style>
