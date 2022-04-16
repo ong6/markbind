@@ -99,4 +99,13 @@ export default {
         max-width: 100%;
         height: auto;
     }
+
+    .point-wrapper {
+      width: 100%;
+      height: 100%;
+      border: 1px solid red;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 </style>

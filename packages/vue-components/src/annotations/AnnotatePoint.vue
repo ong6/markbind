@@ -1,5 +1,7 @@
 <template>
   <div class="annotate-point">
+  {{ this.width }}
+  {{ this.height }}
     <span
       v-if="isMounted"
       class="popover-annotation"
@@ -146,9 +148,13 @@ export default {
       });
 
       return {
-        left: `${this.width * this.toDecimal(this.x) - this.size / 2}px`,
-        top: `${this.height * this.toDecimal(this.y) - this.size / 2}px`,
+        left: this.x,
+        top: this.y,
       };
+      /* return { */
+      /*   left: `${this.width * this.toDecimal(this.x) - this.size / 2}px`, */
+      /*   top: `${this.height * this.toDecimal(this.y) - this.size / 2}px`, */
+      /* }; */
     },
     pointStyle() {
       return {
