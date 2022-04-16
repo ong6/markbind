@@ -12,7 +12,7 @@
     <div class="annotate-point">
       <div v-if="isMounted" class="popover-annotation">
         <span :style="pointPosition">
-          <v-dropdown
+          <v-popover
             v-if="isMounted"
             :placement="placement"
             :delay="0"
@@ -24,7 +24,7 @@
             shift-cross-axis
           >
             <span class="hover-wrapper" @click.stop>
-              <button class="hover-point" :style="pointStyle"></button>
+              <button class="hover-point" :style="pointStyle">{{label}}</button>
               <span class="hover-label">{{ label }}</span>
             </span>
 
@@ -38,7 +38,7 @@
                 </div>
               </div>
             </template>
-          </v-dropdown>
+          </v-popover>
         </span>
 
         <portal v-if="targetEl.id" :to="'popover:' + targetEl.id">
@@ -143,6 +143,7 @@ export default {
         left: this.x,
         top: this.y,
         position: 'absolute',
+        pointerEvents: 'all',
       };
       /* return { */
       /*   left: `${this.width * this.toDecimal(this.x) - this.size / 2}px`, */
@@ -213,6 +214,7 @@ export default {
 
 <style>
     .annotate-point {
+        pointer-events: none;
         position: absolute;
         top: 0;
         left: 0;
